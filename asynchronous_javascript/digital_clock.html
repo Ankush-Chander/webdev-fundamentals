@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Digital Clock</title>
+	</head>
+	<body>
+		<div id="clock_div"></div>
+	</body>
+	<script type="text/javascript">
+		getTime = () =>{
+			date = new Date()
+			time = [date.getHours(), date.getMinutes(), date.getSeconds()].join(":")
+			return time
+		}
+		document.getElementById("clock_div").textContent = getTime()
+		setInterval(()=>{
+			document.getElementById("clock_div").textContent = getTime() 
+		}, 1000)
+	</script>
+</html>
