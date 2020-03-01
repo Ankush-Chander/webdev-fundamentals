@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>
+			Stop watch
+		</title>
+	</head>
+	<body>
+		<div>
+			<div id="timer">00:00:00</div>
+			<div>
+				<button id="start_button">Start</button>
+				<button id="stop_button">Stop</button>
+				<button id="reset_button">Reset</button>
+			</div>
+		</div> 
+	</body>
+	<script type="text/javascript">
+		var counter = 0
+		var time_elapsed = 0
+		clock_time= (deciseconds_elapsed) => {
+			seconds_elapsed = Math.floor(deciseconds_elapsed/10)
+			minutes = Math.floor(seconds_elapsed/60)
+			seconds = seconds_elapsed%60
+			deciseconds = Math.floor(deciseconds_elapsed%10)  
+			return [minutes, seconds, deciseconds].join(":")
+		}
+
+		document.getElementById("start_button").addEventListener("click",()=>{
+			document.getElementById("start_button").disabled = true
+			document.getElementById("stop_button").disabled = false
+			counter = setInterval(()=>{
+				document.getElementById("timer").textContent = clock_time(time_elapsed)
+				time_elapsed +=1
+		},100)
+		})
+
+		document.getElementById("reset_button").addEventListener("click",()=>{
+			clearInterval(counter)
+			time_elapsed = 0
+			document.getElementById("timer").textContent = clock_time(time_elapsed)
+			document.getElementById("start_button").disabled = false
+			document.getElementById("stop_button").disabled = false
+		})
+
+		document.getElementById("stop_button").addEventListener("click",()=>{
+			clearInterval(counter)
+			document.getElementById("stop_button").disabled = true
+			document.getElementById("start_button").disabled = false
+		})
+	</script>
+</html>
